@@ -1,2 +1,3 @@
-# nvme_csd
-A Software Framework for Hardware Agnostic NVMe Computational Storage Devices 
+# NVMe CSD
+
+**A Software Framework for Hardware Agnostic NVMe Computational Storage Devices**
