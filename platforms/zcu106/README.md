@@ -35,25 +35,262 @@ In order to build the bootable images for the project through petalinux the hard
 
 In order to make the scripts below clearer let's assume we work in the `work` directory.
 
-To facilitate development we will build from an external Linux source (that we will be able to modify directly, rather than applying patches to the default Petalinux linux).
+The base boot images and environment are built with Petalinux, then the Linux kernel itself will be built outside of Petalinux, this allows for faster recompilation of the Linux kernel and allows to directly modify the kernel source code rather than applying patches to the default Petalinux linux.
+
+Download (TODO link) or move the XSA file generated above to the `work` directory
 
 ```shell
-cd work
-git clone https://github.com/rick-heig/linux-xlnx.git
-cd linux-xlnx
-git checkout csd_20231212
+# Create the project (inside the work directory)
+petalinux-create --type project --template zynqMP --name csd
+# Go inside the project directory
+cd csd
+# Configure the project with the XSA file
+petalinux-config --get-hw-description=../exported_hardware.xsa
+# Configure the project (select options, see below)
 ```
 
+Under "Image Packaging Configuration" - "Root filesystem type" select "EXT4 (SD/eMMC/SATA/USB)" instead of "INITRD".
+Check that the Device node of SD device is `/dev/mmcblk0p2`.
+
+Save and exit.
+
+modify the device tree in `work/csd/project-spc/meta-user/recipes-bsp/device-tree/files/system-user.dtsi`
+So that it contains the following :
+
+```
+/include/ "system-conf.dtsi"
+/ {
+};
+
+&amba_pl {
+	axi_pcie_0: axi-pcie@400000000 {
+		compatible = "xlnx,xilinx-pcie-ep";
+		reg = <0x00000004 0x00000000 0x0 0x1000>, <0x0 0xB0000000 0x0 0x00600000>,
+		      <0x0 0xA0620000 0x0 0x1000>, <0x0 0xA0630000 0x0 0x1000>,
+		      <0x0 0xA0640000 0x0 0x1000>, <0x0 0xA0650000 0x0 0x1000>;
+		reg-names = "ctrl", "windows",
+			    "hdr-conf", "irq-reg",
+			    "msix-addr-reg", "msix-data-reg";
+		xlnx,num-windows = <6>;
+		xlnx,window-size = <0x100000>;
+	};
+};
+
+&xdma_0 {
+	status = "disabled";
+};
+
+&axi_gpio_0 {
+	status = "disabled";
+};
+
+&axi_gpio_1 {
+	status = "disabled";
+};
+
+&pcie_gpio {
+	status = "disabled";
+};
+
+&pcie_irq {
+	status = "disabled";
+};
+
+&cfg_msix_addr {
+	status = "disabled";
+};
+
+&cfg_msix_data {
+	status = "disabled";
+};
+```
+
+This will allow the Linux endpoint driver for the Xilinx PCIe AXI bridge to load. The [driver](https://github.com/rick-heig/linux-xlnx/blob/csd_20231212/drivers/pci/controller/pcie-xilinx-ep.c) is a driver we wrote for this project because there was no [Linux PCIe endpoint](https://www.kernel.org/doc/html/latest/PCI/endpoint/index.html) driver for this IP. This allows to implement an endpoint PCIe function in Linux and is different than the usual PCIe host controller drivers or PCIe device drivers that exist and are usually used for this IP (host side). Here we access from the device side.
+
+The address ranges match the address ranges in the Vivado project for the PCIe AXI bridge IP (control and windows) and several GPIO IPs that are used to control PCI header values, IRQs, and MSI-X (MSI-X support depends on the hardware project and is not the default, the device tree also need the boolean "msix-capable" property).
+
 ```shell
-# Create the project
-petalinux-create --type project --template zynqMP --name csd
-# Copy files
-# Configure the project with the XSA file
-petalinux-config --get-hw-description=/path/to/exported_hardware.xsa
-# Configure the project (select options)
 # Build the project
 petalinux-build
 # Package the project
 petalinux-package --boot --fsbl --fpga --pmufw --u-boot --force
 ```
 
+The packaging will create the `BOOT.bin` file. This file contains the pmu firmware, fsbl, u-boot, FPGA bitstream and device tree blob. This file is used along with the `boot.scr` and `Image` files in the main `BOOT` partition of the SD card. Note that this just compiled a standard PetaLinux linux kernel and we will use our own kernel, see below.
+
+### Build Linux out of Petalinux
+
+For development purposes it is much faster to build Linux out of PetaLinux, the build commands are given below. Note that it would be possible to generate a PetaLinux project with this kernel (external sources) or by adding all necessary patches to the PetaLinux linux.
+
+```shell
+# Go in the work directory
+cd work
+# Clone Linux
+git clone https://github.com/rick-heig/linux-xlnx.git
+# Go into the Linux directory
+cd linux-xlnx
+# Checkout the branch with the CSD code
+git checkout csd_20231212
+# Source the PetaLinux script so that env variables and tools are available
+source /<path to Petalinux install>/PetaLinux/2023.1/tool/settings.sh
+# Set the environment variables for cross compilation
+export CROSS_COMPILE=aarch64-linux-gnu-
+export ARCH=arm64
+export CC=aarch64-linux-gnu-gcc
+# Load the default configuration (to see the file check arch/arm64/configs)
+make xilinx_zynqmp_csd_defconfig
+# Build the Linux kernel
+make all -j $(nproc)
+```
+
+The `Image` file will be generated under `work/linux-xlnx/arch/arm64/boot/` we will copy this file to the SD card. The modules (drivers) will need to be installed onto the SD card as well.
+
+**Warning** : If you want to make changes and recompile the kernel you can call `make all -j $(nproc)` from the same terminal. The important detail is that `CROSS_COMPILE`, `ARCH`, and `CC` are set when calling `make`, otherwise it wil take the default values of your system (which might be different) and this will cause build issues.
+
+We suggest to write and use a small script e.g., `build.sh` in the `linux-xlnx` directory and call that script. This will make sure that the environment variables are set. The script can contain the following :
+
+```shell
+#!/bin/bash
+
+source /<path to PetaLinux install>/PetaLinux/2023.1/tool/settings.sh
+export CROSS_COMPILE=aarch64-linux-gnu-
+export ARCH=arm64
+export CC=aarch64-linux-gnu-gcc
+
+# Create config if not present
+if [ ! -f .config ]
+then
+    make xilinx_zynqmp_csd_defconfig
+fi
+
+# Build kernel
+make all -j $(nproc)
+```
+
+### Prepare SD card
+
+Partition the SD card with two partitions
+
+1) The `BOOT` partition of 512 MB in FAT32
+2) The `RootFS` partition in EXT4
+
+```shell
+sudo fdisk /dev/<your SD card>
+```
+
+Create a new partition table of type DOS with `o`, this will overwrite the old partition table. Then create the first partition with `n`, `p` primary, default partition number 1, default start sector, `+512M` size. Then create the second partition with `n`, `p` primary, default partition number 2, default start sector, and the default parameter for the size. Finally, write to disk with `w`.
+
+```shell
+# Format as FAT32
+sudo mkfs.vfat /dev/<your SD card>1
+# Relabel as BOOT
+sudo fatlabel /dev/<your SD card>1 BOOT
+# Format as EXT4
+sudo mkfs.ext4 /dev/<your SD card>2
+# Relabel as RootFS
+sudo e2label /dev/<your SD card>2 RootFS
+# Make sure info is written to SD card
+sudo sync
+```
+
+Copy the files `BOOT.bin`, `boot.scr` and `Image` from `work/csd/images/linux/` to the `BOOT` partition.
+
+```shell
+# For example, adapt the paths
+sudo cp work/csd/images/linux/BOOT.bin /media/user/BOOT/
+sudo cp work/csd/images/linux/boot.scr /media/user/BOOT/
+sudo cp work/linux-xlnx/arch/arm64/boot/Image /media/user/BOOT/
+# Do not copy work/csd/images/linux/Image file, this is the unmodified PetaLinux Linux
+```
+
+Extract `rootfs.tar.gz` to the `RootFS` partition.
+
+```shell
+# For example, adapt the paths
+sudo tar -xvf work/csd/images/linux/rootfs.tar.gz /media/user/RootFS/
+```
+
+Install the kernel modules to the SD card.
+```shell
+# In the work/linux-xlnx directory use the following command (adapt RootFS path) :
+sudo ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=/media/user/RootFS make modules_install
+```
+
+Safely eject the SD card.
+
+### Update the Linux kernel
+
+To update the Linux kernel on the SD card after modifications and build there are two things to do 1) update the `Image` file in the `BOOT` partition. 2) Install the kernel modules. See above for instructions.
+
+Note : If the kernel modules are not used and the git history of the kernel not changed, there is not need to reinstall the kernel modules, just update the `Image` file will be enough.
+
+The RootFS can simply be updated on the SD card directly.
+
+# SD Card boot
+
+Once the SD card is ready, insert it in the ZCU106 board. Make sure the boot switch is set to SD card boot.
+
+| Boot Mode | Mode SW6 [4:1] |
+|-----------|----------------|
+| JTAG      | ON,ON,ON,ON    |
+| QSPI      | ON,ON,OFF,ON   |
+| SD        | OFF,OFF,OFF,ON |
+
+For reference see table 2-4 in the [manual](https://www.xilinx.com/support/documents/boards_and_kits/zcu106/ug1244-zcu106-eval-bd.pdf).
+
+Turn on the dev board and check through UART that the system boots.
+
+Once booted it will ask for a login, the default login is `petalinux`, on the first boot it will ask to set a password.
+```
+PetaLinux 2023.1+release-S05010539 csd ttyPS0
+
+csd login: petalinux
+You are required to change your password immediately (administrator enforced).
+New password: 
+Retype new password: 
+```
+
+You can verify that everything is ok (drivers loaded) with the following command : `dmesg | grep pci`
+
+```
+csd:~$ dmesg | grep pci
+[    1.357490] pci_epf_nvme: Registered driver
+[    1.357755] xilinx-pcie-ep 400000000.axi-pcie: xilinx-pcie-ep: Probe
+[    1.362542] xilinx-pcie-ep 400000000.axi-pcie: Probe successful
+```
+
+The `pci_epf_nvme` driver will have been registered (because compiled in-kernel and not as a module, so no need to load it).
+
+The `xilinx-pcie-ep` endpoint driver will have probed successfully. If not there is a problem with either, the bitstream, the driver or the device tree.
+
+## PXE (network) boot
+
+Because it can be cumbersome during development to update the Linux kernel on the SD card to test modifications, it is also possible to boot from network with PXE Boot.
+
+For more information check out the [PetaLinux documentation](https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide/Configuring-TFTP/PXE-Boot).
+
+## Update the FPGA bitstream
+
+If modifications were made to the hardare project and it has been rebuilt with Vivado, export the hardware (XSA) with bitstream and in the PetaLinux project run :
+
+```shell
+# Adapt path to XSA
+petalinux-config --get-hw-description=<path to>/exported_hardware.xsa
+```
+Save and exit config.
+```shell
+# Build the project
+petalinux-build
+# Package the project
+petalinux-package --boot --fsbl --fpga --pmufw --u-boot --force
+```
+
+Replace the `BOOT.bin` file on the SD card by the newly generated one.
+
+## Installing Ubuntu
+
+Ubuntu RootFS can be downloaded from https://ubuntu.com/download/amd
+
+Select ZynqUltraScale+ MPSoC Development Boards (Works on ZCU102, ZCU104, ZCU106).
+
+The RootFS can be extracted from the `iot-zcu10x-classic-desktop-2004-x07-20210728-85-rootfs.tar.gz` file similarly as the PetaLinux RootFS above.
