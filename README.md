@@ -42,5 +42,13 @@ sudo nvme-epf-script -q 4 -l /dev/sda --threads 4 start
 sudo nvme list
 ```
 
+Which will list all NVMe drives, e.g., a Samsung 970 and the CSD, listed as "Linux pci_epf".
+```
+Node                  SN                   Model                                    Namespace Usage                      Format           FW Rev  
+--------------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
+/dev/nvme0n1          S4EWNM0TA08899W      Samsung SSD 970 EVO Plus 1TB             1         580.54  GB /   1.00  TB    512   B +  0 B   2B2QEXM7
+/dev/nvme1n1          0df8d0659e3ecf8c2a94 Linux pci_epf                            1         500.11  GB / 500.11  GB    512   B +  0 B   6.5.0-rc
+```
+
 6) The CSD can be used as a normal disk.
 7) For the computational capabilities and demos check the README in the `host` directory.
