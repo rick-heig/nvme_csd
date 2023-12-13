@@ -210,6 +210,14 @@ Extract `rootfs.tar.gz` to the `RootFS` partition.
 sudo tar -xvf work/csd/images/linux/rootfs.tar.gz /media/user/RootFS/
 ```
 
+Copy the NVMe launch script to the RootFS
+```shell
+# For example, adapt the paths
+sudo cp ../scripts/nvme-epf-script /media/user/RootFS/usr/bin/
+# Add executable flag
+sudo chmod +x /media/user/RootFS/usr/bin/nvme-epf-script
+```
+
 Install the kernel modules to the SD card.
 ```shell
 # In the work/linux-xlnx directory use the following command (adapt RootFS path) :
@@ -294,3 +302,5 @@ Ubuntu RootFS can be downloaded from https://ubuntu.com/download/amd
 Select ZynqUltraScale+ MPSoC Development Boards (Works on ZCU102, ZCU104, ZCU106).
 
 The RootFS can be extracted from the `iot-zcu10x-classic-desktop-2004-x07-20210728-85-rootfs.tar.gz` file similarly as the PetaLinux RootFS above.
+
+This will allow you to boot Ubuntu and install packages through the aptitude package manager.
