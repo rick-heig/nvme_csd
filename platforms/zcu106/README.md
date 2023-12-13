@@ -306,3 +306,9 @@ Select ZynqUltraScale+ MPSoC Development Boards (Works on ZCU102, ZCU104, ZCU106
 The RootFS can be extracted from the `iot-zcu10x-classic-desktop-2004-x07-20210728-85-rootfs.tar.gz` file similarly as the PetaLinux RootFS above.
 
 This will allow you to boot Ubuntu and install packages through the aptitude package manager.
+
+## References
+
+- PetaLinux Doc : https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide
+- ZCU106 Page : https://www.xilinx.com/products/boards-and-kits/zcu106.html
+- ZCU106 Manual : https://docs.xilinx.com/v/u/en-US/ug1244-zcu106-eval-bd
