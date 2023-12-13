@@ -52,6 +52,8 @@ petalinux-config --get-hw-description=../exported_hardware.xsa
 Under "Image Packaging Configuration" - "Root filesystem type" select "EXT4 (SD/eMMC/SATA/USB)" instead of "INITRD".
 Check that the Device node of SD device is `/dev/mmcblk0p2`.
 
+Under "DTG Settings" - "(template) MACHINE_NAME", replace "template" by `zcu106-reva`. Without this the device tree will be a generic one for ZynqUS+ and some things will not work on the ZCU106 board, e.g., the SATA port.
+
 Save and exit.
 
 modify the device tree in `work/csd/project-spc/meta-user/recipes-bsp/device-tree/files/system-user.dtsi`
