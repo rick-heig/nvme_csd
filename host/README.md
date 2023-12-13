@@ -47,18 +47,18 @@ sudo nvme effects-log /dev/nvme1 -H
 
 Once the effects log is properly updated custom commands can be sent through the Windows driver.
 
-As the NVMe CSD uses a single opcode for most custom admin commands (and uses differnt sub opcodes to differentiate them) it should only require to add a single command to the effects log.
+As the NVMe CSD uses a single opcode `0xC0` for most custom admin commands (and uses differnt sub opcodes to differentiate them) it should only require to add a single command to the effects log.
 
 More Windows related info :
 - https://learn.microsoft.com/en-us/windows/win32/fileio/working-with-nvme-devices
 - https://github.com/ken-yossy/nvmetool-win
 
 ### Mac OS X Support
-As most Mac computers don't allow to directly plug in PCIe cards we have not tested this, even if the CSD is recognized as a drive we found not information on sending custom commands (closed source drivers).
+As most Mac computers don't allow to directly plug in PCIe cards we have not tested this, even if the CSD is recognized as a drive we found no information on sending custom commands (closed source drivers).
 
 ### FreeBSD / OpenBSD Support
 
-There is a tool `nvmecontrol`that allows for IO and admin command passthrough. It uses a similar IOCTL mechanism as Linux for this, therefore it should be possible to have the CSD work on BSD. See how that tool does the IO/Admin passthrough and use that in order to send custom IO/Admin commands in the computational storage API. We have not tested this.
+There is a tool `nvmecontrol` that allows for IO and admin command passthrough. It uses a similar IOCTL mechanism as Linux for this, therefore it should be possible to have the CSD work on BSD. See how that tool does the IO/Admin passthrough and use that in order to send custom IO/Admin commands in the computational storage API. We have not tested this.
 
 - https://man.freebsd.org/cgi/man.cgi?query=nvmecontrol&apropos=0&sektion=8&manpath=FreeBSD+14.0-RELEASE+and+Ports&arch=default&format=html
 - https://github.com/lattera/freebsd/blob/master/sbin/nvmecontrol/nvmecontrol.c
