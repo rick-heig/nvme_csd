@@ -8,7 +8,7 @@ For Windows the CSD should be recognized as an NVMe disk. For more info on compu
 
 - `benchmarks` : Contain commands and instructions to benchmark the CSD.
 - `demos` : Contains code and instructions for CSD demos.
-- `snia_cp_ap` : An implementation of the SNIA Computational Storage API for the CSD.
+- `snia_cs_api` : An implementation of the SNIA Computational Storage API for the CSD.
 - `socket_relay` : Relay program to route TCP sockets over NVMe.
 
 ## Host requirements
@@ -25,13 +25,17 @@ A Linux based OS (for other OSes see below)
 - Either with custom ("vendor specific") admin NVMe commands with the `0xC0` opcode (`C` as in compute), these compute commands are then differentiated by the sub-opcodes (`CDW10` mainly), refer to implementation for details.
 - Either through a socket (e.g., SSH) over NVMe, this is also implemented with the custom commands above. To open a socket over NVMe see the documentation in the `socket_relay` directory.
 
-## Support
+## Support
 
-### Linux
+### Linux
+
+**Yes**
 
 The CSD is supported on Linux based operating systems with the default NVMe driver. (Of couse on very old kernels without NVMe support it will not work).
 
 ### Windows Support
+
+**Possible**
 
 We did not work on Windows support. By default the NVMe CSD should appear as a disk under Windows.
 
@@ -54,9 +58,14 @@ More Windows related info :
 - https://github.com/ken-yossy/nvmetool-win
 
 ### Mac OS X Support
+
+**No**
+
 As most Mac computers don't allow to directly plug in PCIe cards we have not tested this, even if the CSD is recognized as a drive we found no information on sending custom commands (closed source drivers).
 
 ### FreeBSD / OpenBSD Support
+
+**Possible**
 
 There is a tool `nvmecontrol` that allows for IO and admin command passthrough. It uses a similar IOCTL mechanism as Linux for this, therefore it should be possible to have the CSD work on BSD. See how that tool does the IO/Admin passthrough and use that in order to send custom IO/Admin commands in the computational storage API. We have not tested this.
 
