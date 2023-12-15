@@ -70,3 +70,7 @@ ssh -p 22333 -L 8000:localhost:8000 petalinux@localhost
 ```
 
 Will allow clients on the host to connect to port 8000 and the connection will be forwarded to the server listening on port 8000 on the CSD.
+
+### Note
+
+The NVMe custom command "read relay" (`main.c` in the `tsp_nvme_read_relay()`) will receive a completion when the socket is read (over the NVMe relay), the socket read is blocking, so unless the socket is disconnect or data is read, no completion is sent back to the host. So depending on the NVMe driver there might be a timeout on the command. The timeout passed through `libnvme` in `main.c` in the `tsp_nvme_read_relay()` is set to 0, which hopefully is "no timeout", but if instead this would be interpreted as "default timeout" by the driver, the value can be changed to a very high value (it is in milliseconds, on a 32-bit unsigned integer).

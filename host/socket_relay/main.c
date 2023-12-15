@@ -98,7 +98,7 @@ static CS_STATUS tsp_nvme_write_relay(CS_DEV_HANDLE fd, int relay_desc, char *da
 		0 /** @todo ?*/ /*nsid*/, 0 /*cdw2*/, 0 /*cdw3*/, TSP_CS_COMM /*cdw10*/, 1 /* Write_nRead cdw11*/,
 		len /* length cdw12*/, relay_desc /*cdw13*/, 0 /*cdw14*/, 0 /*cdw15*/,
 		buffer_len /*data_len*/, buffer /*data*/, 0 /*metadata_len*/, NULL /*metadata*/,
-		0 /*timeout_ms*/, NULL /*result, not used in QEMU emulation...*/);
+		0 /*timeout_ms*/, NULL /*result*/);
     if (ret) {
         MSG_PRINT_ERROR("Failed to write relay");
         return CS_ERROR_IN_EXECUTION;
@@ -115,7 +115,7 @@ static ssize_t tsp_nvme_read_relay(CS_DEV_HANDLE fd, int relay_desc, char *data,
 		0 /** @todo ?*/ /*nsid*/, 0 /*cdw2*/, 0 /*cdw3*/, TSP_CS_COMM /*cdw10*/, 0 /* Write_nRead cdw11*/,
 		0 /*cdw12*/, relay_desc /*cdw13*/, 0 /*cdw14*/, 0 /*cdw15*/,
 		buffer_len /*data_len*/, buffer /*data*/, 0 /*metadata_len*/, NULL /*metadata*/,
-		3600000 /* 1h - timeout_ms*/, NULL /*result, not used in QEMU emulation...*/);
+		0 /* timeout_ms*/, NULL /*result*/);
     if (ret) {
         MSG_PRINT_ERROR("Failed to read relay");
         return -1;
