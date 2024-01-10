@@ -139,6 +139,8 @@ systemctl enable systemd-networkd
 vi /etc/systemd/network/ethernet.network
 # Generate and chose locales for the system (there will be some warnings and takes a while)
 dpkg-reconfigure locales
+# Add extra packages to package manager source list, add "restricted universe multiverse" after "main"
+vi /etc/apt/sources.list
 # Add a non root user
 adduser ubuntu
 # Finally exit the chroot env with "ctrl-D"
