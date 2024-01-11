@@ -211,3 +211,9 @@ Packages can also be installed through host with chroot but depending on what yo
 ```
 
 So if we need `/dev/null` for example we can simply create it like so.
+
+# Updating the Linux kernel
+
+Make your changes in the Linux source and rebuild with buildroot with `make` (it will be quite fast if the kernel was already built once). If you want to change the config of the kernel use `make linux-menuconfig` from the buildroot directory.
+
+Once everything is built with buildroot you can copy the kernel `Image` from `output/images/` to the boot partition of the SD card (the one that has the `extlinux` folder, `Image` and `.dtb` device tree blob). If changes were made to the device tree, the `.dtb` should also be updated similarly.
