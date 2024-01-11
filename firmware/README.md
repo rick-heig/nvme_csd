@@ -54,3 +54,84 @@ sudo ./main -d /dev/tsp-3 &
 Turn on the host computer. The disk will work as a standard disk seen from the host but data writtent to the backend will be encrypted. Upon reads the data will be decrypted. For demonstration purposes the key is stored in the CSD user space encryption/decryption executable, but this key could be stored somewhere else.
 
 If the backend storage is accessed without the decryption, e.g., by disabling the IO path through user-space, then the data will not be decrypted by the host, so the host will not be able to decrypt the disk (e.g., read the partition table, and data).
+
+## Natural language processing demo
+
+The natural language processing demo is made with rclip (https://github.com/yurijmikhalevich/rclip) and rclip-server (https://github.com/ramayer/rclip-server). These are based on the OpenAI CLIP model (https://github.com/openai/CLIP).
+
+The idea is that images are stored on the CSD as it would be on a normal drive and through computational storage commands SSH tunneling over NVMe we can send instructions to the drive to process the images to create the rclip database which are abstract high dimensional representations of the images, these can then be queried with natural language. There are two ways to query, either through a web server that is exposed through a port that is tunneled over SSH over NVMe that will show the images for the query or through command line which will return the paths to the images. It would also be possible to create a custom NVMe command to return the paths of the images.
+
+### Setup
+
+On the NVMe CSD we need to install rclip-server. There are several ways to install it but the simplest is with the Ubuntu RootFS for the CSD and `pip` (Package Installer for Python).
+
+Note this is for Python 3.10 or newer, we recommend using a python virtual environment if the Python 3.10 or newer is not the main python installed for the system.
+
+Instructions are given here for a Ubuntu 23.10 Mantic RootFS as a reference, they might need some adaptation for other RootFSes, however the instructions below allow to get all the requirements.
+
+On the CSD, install all required packages :
+
+```shell
+# Install git if not yet installed
+sudo apt install -y git
+# Install python3 package installer and venv
+sudo apt install -y python3-pip python3-venv
+# Install snap
+sudo apt install -y snapd
+# Install rclip
+sudo snap install rclip
+# Clone rclip-server source code
+git clone https://github.com/ramayer/rclip-server.git
+# Change directory
+cd rclip-server
+# Setup python virtual env
+python3 -m venv .
+# Activate phyton venv
+source bin/activate
+# Install all required python packages (this can take a long time for some reason)
+pip install clip fastapi filelock matplotlib mwclient numpy pillow requests seaborn starlette torch tqdm uvicorn
+pip install git+https://github.com/openai/CLIP.git
+```
+
+Install rclip, see instructions here https://github.com/yurijmikhalevich/rclip
+
+### Index a directory with images
+
+This can be done from the CSD or from the host. From inside the image directory run the command below. The environment variable tells where to save the rclip database. Note that for the database to make sense to the CSD the filesystem should be mounted with the same path (or simply index it from within the CSD).
+
+```shell
+export RCLIP_DATADIR=$(pwd)/.rclip; rclip index
+```
+
+For the CSD to be able to access the backing storage device that is exposed to the host over NVMe it should be mounted locally. This can be done with the `mount` command as root.
+
+### Launch the server on the CSD
+
+From the `rclip-server` directory launch the following command
+
+```shell
+# Activate phyton venv
+source bin/activate
+# Run rclip-server
+env CLIP_DB=/path/to/images/.rclip/db.sqlite3 uvicorn rclip_server:app --reload
+# Wait until the message "Application startup complete" appears
+```
+
+The `CLIP_DB` path should point to the database created in the indexing step above.
+
+### Access the server over from a web browser on the host over SSH over NVMe
+
+Once `rclip-server` is launched on the CSD as shown above, on the host use the socket relay in `nvme_csd/host/socket_relay` to create a relay to SSH into the CSD.
+
+```shell
+# On Host
+
+# Open a relay between port 22 (SSH) of the CSD and expose it on port 22333 on host
+sudo ./relay -d /dev/<csd, e.g., nvme1> -P 22 -p 22333
+# Connect to the CSD over SSH on port 22333 and redirect port 8000 from CSD to port 8000 on host
+ssh -L 8000:localhost:8000 <csd_username>@localhost -p 22333
+```
+
+You can now open a browser and connect to localhost port 8000 to access the webserver !
+
+Note: The reason why we redirect port 8000 over SSH rather than to use the relay directly is because the relay closes the socket when the client closes. So when visiting a web page a connection is opened then close, then opened again etc. and this closes the relay. With SSH the port will be redirected until the SSH connection is closed. This scheme is simple, but the relay code could be changed to open new connections as well without the need for a relaunch.
