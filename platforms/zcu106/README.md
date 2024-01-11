@@ -4,6 +4,8 @@ The ZCU106 is a ZynqUltrascale+ FPGA-SoC evaluation kit from AMD/Xilinx.
 
 Reference site : https://www.xilinx.com/products/boards-and-kits/zcu106.html
 
+![ZCU106](../../res/pictures/zcu106.jpg)
+
 ## Requirements
 
 - (Optional) To recreate and rebuild the hardware project [Vivado 2023.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2023-1.html) with support for ZynqUltrascale+ devices is required.

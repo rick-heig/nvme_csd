@@ -2,6 +2,8 @@
 
 These are the instructions to setup Linux and the CSD firmware for the RockPro64 board. The Linux kernel and RootFS are built with buildroot. For running the CSD follow the instructions on the main [README](../../README.md).
 
+![RockPro64](../../res/pictures/rockpro64.jpg)
+
 # Setting up a development environment
 
 Here are the steps to set up a en environment that allows for rapid code changes in the Linux kernel source code directly (without the need to apply patches to a mainline kernel in buildroot).
