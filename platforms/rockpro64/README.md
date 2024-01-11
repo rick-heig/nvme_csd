@@ -73,6 +73,24 @@ sudo fdisk /dev/<your SD card device>
 sudo sync
 ```
 
+### Resizing the RootFS
+
+The default RootFS is of very small size (256 MB), but it can be resized to use all of the SD card remaining space. This will be required to install larger RootFS such as an Ubuntu RootFS. To do so follow the instructions below :
+
+```shell
+# Open the SD card device with fdisk
+sudo fdisk /dev/<the SD card device> # e.g., /dev/sdg
+# Delete the current RootFS partition (it should be partition 4, the last one) with 'd'
+# Create a new partition (number 4) with 'n' and use the default parameters for the size, keep the signature !
+# write the changes with 'w'
+# Check the filesystem with e2fsck
+sudo e2fsck -f /dev/<the SD card device RootFS partition> # e.g., /dev/sdg4
+# Resize the RootFS
+sudo resize2fs /dev/<the SD card device RootFS partition> # e.g., /dev/sdg4
+# Make sure changes are written to SD card with sync
+sudo sync
+```
+
 ### Username and password
 
 The default credentials are : username : `buildroot` password `buildroot`
