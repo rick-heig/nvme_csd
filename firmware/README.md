@@ -1,6 +1,6 @@
 # CSD Firmware
 
-The CSD firmware is implemented as a Linux PCI endpoint function.
+The CSD firmware is implemented as a Linux PCI endpoint function. For the code refer to the file `drivers/pci/endpoint/functions/pci-epf-nvme.c`. This is the same file for all platforms, you can find it in the kernel source for the given platform (since some platforms rely on non mainline Linux kernel (e.g., linux-xlnx)). For example [here](https://github.com/rick-heig/linux-xlnx/blob/csd_20231212/drivers/pci/endpoint/functions/pci-epf-nvme.c) for linux-xlnx and [here](https://github.com/rick-heig/linux/blob/rockpro64_csd_v1/drivers/pci/endpoint/functions/pci-epf-nvme.c) in a fork of mainline Linux. For further development setup a platform of choice and work from there. Porting to other platforms is also possible but requires a little work (similar to what is done to setup the documented supported platforms).
 
 ## Setting up software RAID on the CSD
 
