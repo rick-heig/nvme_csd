@@ -217,3 +217,12 @@ So if we need `/dev/null` for example we can simply create it like so.
 Make your changes in the Linux source and rebuild with buildroot with `make` (it will be quite fast if the kernel was already built once). If you want to change the config of the kernel use `make linux-menuconfig` from the buildroot directory.
 
 Once everything is built with buildroot you can copy the kernel `Image` from `output/images/` to the boot partition of the SD card (the one that has the `extlinux` folder, `Image` and `.dtb` device tree blob). If changes were made to the device tree, the `.dtb` should also be updated similarly.
+
+If changes were made to modules (drivers), or if module parameters were changed, or if git revision or version of kernel changed, the newly compiled modules should be installed to the RootFS.
+
+This can be done from the `work/buildroot/output/build/linux-custom` directory.
+
+```shell
+# Please adapt the path to the RootFS on the SD card
+sudo ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=/path/to/sd/rootfs/ make modules_install
+```
