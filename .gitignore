@@ -1,0 +1,5 @@
+platforms/*/work/
+archives_*.md
+
+*.o
+*.d
