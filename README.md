@@ -2,7 +2,7 @@
 
 **A Linux based Firmware for Hardware Agnostic NVMe Computational Storage Devices**
 
-This project provides an open-source firmware to build hardware agnostive NVMe computational storage devices.
+This project provides an open-source firmware to build hardware agnostic NVMe computational storage devices.
 
 The firmware is implemented as a Linux PCI endpoint function driver. https://docs.kernel.org/PCI/endpoint/pci-endpoint.html
 
