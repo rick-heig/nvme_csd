@@ -143,7 +143,7 @@ sudo cp $(which qemu-aarch64-static) rootfs/usr/bin/
 sudo chroot rootfs qemu-aarch64-static /bin/bash
 ```
 
-### Configuring the Ubuntu RootFS
+### Configuring the Ubuntu RootFS
 
 While being in the RootFS with chroot execute the commands below (ctrl-D to exit). **Warning:** be sure to execute these commands in the `chroot` environment and not on the host computer directly.
 
