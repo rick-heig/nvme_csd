@@ -51,7 +51,8 @@ Node                  SN                   Model                                
 ```
 
 6) The CSD can be used as a normal disk.
-7) For the computational capabilities and demos check the README in the `host` directory.
+7) For the computational capabilities and demos check the README in the [host](host/README.md) directory.
+8) For SSH and adding the CSD to the host network check the [host/socket_relay](host/socket_relay/README.md) directory.
 
 # Information for developers
 
