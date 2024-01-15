@@ -52,6 +52,8 @@ Because these buffers are binary buffers and should be read of their exact size 
 
 Of course only the number of entries that are filled make sense, so it is best to fill them fully (1,000 commands) during a benchmark before extracting them. If not fully filled, simply take the first entries corresponding the to number of statistics filled.
 
+The binary buffers can be converted to CSV with the program [csv_from_buffer.cpp](./csv_from_buffer/csv_from_buffer.cpp) which can be run either on the host or the CSD.
+
 ## Filtering
 
 It is possible to filter the recorded time stamps based on command read/write size. This is useful when you want to benchmark a particular size (e.g., 16kB) of read/write commands.
