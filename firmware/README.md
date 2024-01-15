@@ -135,3 +135,7 @@ ssh -L 8000:localhost:8000 <csd_username>@localhost -p 22333
 You can now open a browser and connect to localhost port 8000 to access the webserver !
 
 Note: The reason why we redirect port 8000 over SSH rather than to use the relay directly is because the relay closes the socket when the client closes. So when visiting a web page a connection is opened then close, then opened again etc. and this closes the relay. With SSH the port will be redirected until the SSH connection is closed. This scheme is simple, but the relay code could be changed to open new connections as well without the need for a relaunch.
+
+### Access the server over network over NVMe
+
+It is also possible to access the server as one would normally over the network, with an IP address, for this first the CSD must be connected to the network, instructions for this are given in the following [README](../host/socket_relay/README.md).
