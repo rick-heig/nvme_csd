@@ -246,3 +246,7 @@ This can be done from the `work/buildroot/output/build/linux-custom` directory.
 # Please adapt the path to the RootFS on the SD card
 sudo ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=/path/to/sd/rootfs/ make modules_install
 ```
+
+# Known issues
+
+Rebooting the host computer without rebooting the CSD causes a kernel panic in the CSD when it tries to access PCIe space. For the moment the solution is to reboot the CSD when the host is rebooted. This is an issue with the RK3399 PCIe controller and should be possible to fix with a patch to the driver. This problem does not appear non RK3399 platforms (e.g., the ZCU106 platform).
