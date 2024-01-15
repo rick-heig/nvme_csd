@@ -87,6 +87,24 @@ On the host and the CSD the following `apt` packages should be installed `net-to
 
 The host should also have a kernel that has the ethernet bridge support (activated by default as a module on Ubuntu distros).
 
+On the CSD edit the SSH server config to allow for tunneling.
+
+```shell
+# On the CSD
+
+sudo vi /etc/ssh/sshd_config
+```
+
+and set the following options
+
+```
+PermitTunnel yes
+
+PermitRootLogin yes
+```
+
+`PermitRootLogin` is not a necessity but the example below uses the `root` login for simplicity, you can also use a normal user with `sudo`.
+
 ### Setup
 
 From the host (assuming the CSD is `/dev/nvme1`) :
