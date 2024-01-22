@@ -5,6 +5,8 @@
 - ZCU106 (ZynqUS+) : https://www.xilinx.com/products/boards-and-kits/zcu106.html
 - Rockpro64 (RK3399) : https://www.pine64.org/rockpro64/
 - NanoPC-T4 (RK3399) : https://www.friendlyelec.com/index.php?route=product/product&product_id=225
+- **New:** NanoPC-T6 (RK3588) : https://www.friendlyelec.com/index.php?route=product/product&product_id=292
+- **New:** Rock5B (RK3588) : https://radxa.com/products/rock5/5b/
 
 ## Other platforms
 
@@ -27,7 +29,6 @@ Any Soc/FPGA capable of running Linux with a PCIe endpoint capable controller IP
 
 Non exhaustive list of candidate platforms :
 
-- NanoPC-T6 (RK3588) missing PCIe endpoint driver (same for all other RK3588 based platforms) : https://www.friendlyelec.com/index.php?route=product/product&product_id=292
 - Intel/Altera FPGAs with PCIe could be supported but there is no driver to present the PCIe IP as an endpoint controller to a Linux running inside the device (the available drivers are for the host to use the PCIe FPGAs as a device or use the PCIe IP as a host controller).
 
 ## Is my platform compatible ?
