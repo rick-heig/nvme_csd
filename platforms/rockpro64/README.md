@@ -61,7 +61,7 @@ The output file for the SD card will be located here `work/buildroot/output/imag
 
 Modifications can be made, both in the `work/linux` folder to make changes to the kernel and drivers and in the `work/buildroot` directory for changes to the RootFS and other parts.
 
-To rebuild call `make` from the `work/buildroot` directory
+To rebuild call `make` or `make linux-rebuild all`  from the `work/buildroot` directory.
 
 ## Setup SD card
 
@@ -128,10 +128,10 @@ sudo apt install binfmt-support qemu-user-static debootstrap
 mkdir rootfs
 # Populate RootFS with debootstrap tool (here Ubuntu Mantic is chosen, you chose other versions or Debian)
 sudo debootstrap --arch=arm64 mantic rootfs/ http://ports.ubuntu.com/ubuntu-ports/
-# Go in the Linux directory
-cd linux
+# Go in the Buildroot Linux build directory
+cd buildroot/output/build/linux-custom
 # Install the drivers (modules) in the RootFS
-sudo ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=../rootfs/ make modules_install
+sudo ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=../../../../rootfs/ make modules_install
 # Go back to "work" directory
 cd ..
 # Copy the scripts (to launch the CSD) from the buildroot overlay
@@ -166,7 +166,7 @@ adduser ubuntu
 # Finally exit the chroot env with "ctrl-D"
 ```
 
-Config for /etc/system/network/ethernet.network (of the embedded RootFS, not the host computer !) :
+Config for /etc/systemd/network/ethernet.network (of the embedded RootFS, not the host computer !) :
 
 ```
 [Match]
@@ -178,13 +178,13 @@ DHCP=yes
 
 Note that this config can also be written in the rootfs from outside the `chroot` environment.
 
-Finally copy the files to the SD card RootFS partition
+Finally copy the files to the SD card RootFS partition(make sure it is big enough, check above on how to resize).
 
 ```shell
 # Delete old files from (buildroot) RootFS
 sudo rm -rf /media/user/rootfs/*
-# Copy all Ubuntu RootFS files
-sudo cp -r /path_to/nvme_csd/platforms/rockpro64/work/rootfs/* /media/user/rootfs/
+# Copy all Ubuntu RootFS files (the 'p' option is for keep permissions, e.g., owner etc.)
+sudo cp -rp /path_to/nvme_csd/platforms/rockpro64/work/rootfs/* /media/user/rootfs/
 # Sync to make sure data is written to SD in order to safely eject
 sudo sync
 ```
@@ -234,7 +234,7 @@ So if we need `/dev/null` for example we can simply create it like so.
 
 # Updating the Linux kernel
 
-Make your changes in the Linux source and rebuild with buildroot with `make` (it will be quite fast if the kernel was already built once). If you want to change the config of the kernel use `make linux-menuconfig` from the buildroot directory.
+Make your changes in the Linux source and rebuild with buildroot with `make linux-rebuild all` (it will be quite fast if the kernel was already built once). If you want to change the config of the kernel use `make linux-menuconfig` from the buildroot directory.
 
 Once everything is built with buildroot you can copy the kernel `Image` from `output/images/` to the boot partition of the SD card (the one that has the `extlinux` folder, `Image` and `.dtb` device tree blob). If changes were made to the device tree, the `.dtb` should also be updated similarly.
 
@@ -249,4 +249,4 @@ sudo ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=/path/to/sd/ro
 
 # Known issues
 
-Rebooting the host computer without rebooting the CSD causes a kernel panic in the CSD when it tries to access PCIe space. For the moment the solution is to reboot the CSD when the host is rebooted. This is an issue with the RK3399 PCIe controller and should be possible to fix with a patch to the driver. This problem does not appear non RK3399 platforms (e.g., the ZCU106 platform).
+Rebooting the host computer without rebooting the CSD causes a kernel panic in the CSD when it tries to access PCIe space. For the moment the solution is to reboot the CSD when the host is rebooted. This is an issue with the RK3399 PCIe controller and should be possible to fix with a patch to the driver. This problem does not appear non RK3399 platforms (e.g., the ZCU106 platform or RK3588 based platforms).
