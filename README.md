@@ -1,4 +1,30 @@
-# NVMe CSD
+# NVMe Computational Storage Devices based on Open-Source Software and readily available Hardware
+
+This project aims to allow anyone to create their own Non Volatile Memory Express (NVMe) Computational Storage Devices with readily available hardware platforms and open-source software.
+
+## What is computational storage ?
+
+Computational Storage is a new processing paradigm, a new architecture, where storage devices that are capable performing computations are employed.
+
+![Computational Storage](res/diagrams/cs1.png)
+
+Computational Storage Devices (CSDs) allow to reduce the data bottleneck to the main processor. They also allow to scale processing capabilities with the amount of data.
+
+![Computational Storage Scaling](res/diagrams/cs2.png)
+
+CSDs can even perform computations during the main processor's downtime. They can be used for lengthy tasks such as video transcoding or AI model training.
+
+## Our approach to computational storage
+
+Our computation storage devices are based on the Non-Volatile Memory Express (NVMe) open standard and present themselves as such to a computer. They can be used as a traditional NVMe SSD connected over PCIe.
+
+We build them around hardware that is capable of running Linux and implement our NVMe firmware within. This allows for a very large range of hardware, we already support multiple platforms with different capabilities and hardware accelerators (e.g., GPU, FPGA, NPU, Video CODECs, etc.).
+
+![CSD Anatomy](res/diagrams/cs3.png)
+
+Computational functions can be activated through NVMe custom commands as well as TCP/IP tunneled over NVMe. This allows for easy integration and use of CSDs in already existing architectures.
+
+# NVME CSD Firmware
 
 **A Linux based Firmware for Hardware Agnostic NVMe Computational Storage Devices**
 
