@@ -1,6 +1,6 @@
 # FriendlyElec NanoPC-T6 Platform
 
-These are the instructions to setup Linux and the CSD firmware for the FriendlyElec NanoPC-T6 board. The Linux kernel and RootFS are built with buildroot. For running the CSD follow the instructions on the main [README](../../README.md).
+These are the instructions to setup Linux and the CSD firmware for the FriendlyElec NanoPC-T6 board. The Linux kernel and RootFS are built with buildroot. For running the CSD follow the instructions on the main [README](../../README.md). **Only use 1 or 2 threads** because only 2 PCIe DMA engines are available and the general DMA gives errors when used at the same time as the PCIe DMAs.
 
 ![NanoPC-T6](../../res/pictures/nanopc-t6.jpg)
 
