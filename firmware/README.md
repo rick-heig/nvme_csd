@@ -93,8 +93,6 @@ pip install clip fastapi filelock matplotlib mwclient numpy pillow requests seab
 pip install git+https://github.com/openai/CLIP.git
 ```
 
-Install rclip, see instructions here https://github.com/yurijmikhalevich/rclip
-
 ### Index a directory with images
 
 This can be done from the CSD or from the host. From inside the image directory run the command below. The environment variable tells where to save the rclip database. Note that for the database to make sense to the CSD the filesystem should be mounted with the same path (or simply index it from within the CSD).
