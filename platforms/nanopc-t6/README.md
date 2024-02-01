@@ -1,12 +1,40 @@
 # FriendlyElec NanoPC-T6 Platform
 
-These are the instructions to setup Linux and the CSD firmware for the FriendlyElec NanoPC-T6 board. The Linux kernel and RootFS are built with buildroot. For running the CSD follow the instructions on the main [README](../../README.md). **Only use 1 or 2 threads** because only 2 PCIe DMA engines are available and the general DMA gives errors when used at the same time as the PCIe DMAs.
+The FriendlyElec NanoPC-T6 is a single computer board based on the powerful RK3588 octo-core ARM SoC.
 
-![NanoPC-T6](../../res/pictures/nanopc-t6.jpg)
+![NanoPC-T6](../../res/pictures/nanopc-t6_1.jpg)
+
+![NanoPC-T6](../../res/pictures/nanopc-t6_2.jpg)
+
+# Board information
+
+- CPU: Quad-core ARM Cortex-A76(up to 2.4GHz) and quad-core Cortex-A55 CPU (up to 1.8GHz)
+- GPU: Mali-G610 MP4, compatible with OpenGLES 1.1, 2.0, and 3.2, OpenCL up to 2.2 and Vulkan1.2
+- VPU: 8K@60fps H.265 and VP9 decoder, 8K@30fps H.264 decoder, 4K@60fps AV1 decoder, 8K@30fps H.264 and H.265 encoder
+- NPU: 6TOPs, supports INT4/INT8/INT16/FP16
+- RAM: 64-bit 4GB/8GB/16GB LPDDR4X at 2133MHz
+- PCIe M.2 M-Key connector with PCIe 3.0 x4
+- PCIe M.2 E-key connector with PCIe 2.1 x1
+- eMMC Flash: 32GB/64GB/256GB eMMC, at HS400 mode
+- ...
+
+Getting a board : https://www.friendlyelec.com/index.php?route=product/product&product_id=292
+
+Wiki : https://wiki.friendlyelec.com/wiki/index.php/Main_Page
+
+PCIe Bracket STEP file : [PCIe_Bracket_FriendlyElec_NanoPC_T6.step](./PCIe_Bracket_FriendlyElec_NanoPC_T6.step)
+
+M.2 to PCIe x16 female : https://www.delock.com/produkt/64133/merkmale.html
+
+PCIe x4 male-to-male : http://www.adtlink.cn/en/product/R22SS.html or https://www.adexelec.com/pe-flex1-4-8-16 **Important:** You will need the signal swap version of the cable "Tx to Rx signal swap".
+
+For running the CSD follow the instructions on the main [README](../../README.md). **Only use 1 or 2 threads** because only 2 PCIe DMA engines are available and extra threads will use the general DMA gives errors when used at the same time as the PCIe DMAs.
 
 # Setting up a development environment
 
-Here are the steps to set up a en environment that allows for rapid code changes in the Linux kernel source code directly (without the need to apply patches to a mainline kernel in buildroot).
+These are the instructions to setup Linux and the CSD firmware for the FriendlyElec NanoPC-T6 board. The Linux kernel and RootFS are built with buildroot.
+
+Below are the steps to set up a en environment that allows for rapid code changes in the Linux kernel source code directly (without the need to apply patches to a mainline kernel in buildroot).
 
 For the sake of simplicity and make the commands below more uniform we assume that the user is working from the `platforms/nanopc-t6/work` directory
 
