@@ -211,7 +211,7 @@ Extract `rootfs.tar.gz` to the `RootFS` partition.
 
 ```shell
 # For example, adapt the paths
-sudo tar -xvf work/csd/images/linux/rootfs.tar.gz /media/user/RootFS/
+sudo tar -pxvf work/csd/images/linux/rootfs.tar.gz -C /media/user/RootFS/
 ```
 
 Copy the NVMe launch script to the RootFS
