@@ -34,9 +34,9 @@ For running the CSD follow the instructions on the main [README](../../README.md
 
 These are the instructions to setup Linux and the CSD firmware for the FriendlyElec NanoPC-T6 board. The Linux kernel and RootFS are built with buildroot.
 
-Below are the steps to set up a en environment that allows for rapid code changes in the Linux kernel source code directly (without the need to apply patches to a mainline kernel in buildroot).
+Below are the steps to set up a an environment that allows for rapid code changes in the Linux kernel source code directly (without the need to apply patches to a mainline kernel in buildroot).
 
-For the sake of simplicity and make the commands below more uniform we assume that the user is working from the `platforms/nanopc-t6/work` directory
+For the sake of simplicity and make the commands below more uniform we assume that the user is working from the `platforms/nanopc-t6/work` directory.
 
 ## Clone the Linux kernel with CSD
 
@@ -155,6 +155,8 @@ sudo apt install binfmt-support qemu-user-static debootstrap
 ```
 
 ## Setup
+
+From the `platforms/cm3588/work`directory :
 
 ```shell
 # in the work directory create a RootFS directory (can be on SD directly)
