@@ -1,6 +1,12 @@
 # Platforms
 
+Our vision is to provide a single computational storage firmware and have it run on mutiple hardware platforms without the need to rewrite it. We also want to provide a rich development environment on our computational storage devices to allow for rapide prototyping of complex ideas.
+
+![Our vision](../res/diagrams/vision.png)
+
 ## Currently supported and tested platforms
+
+The following platforms are currently supported and have been tested in this project :
 
 - ZCU106 (ZynqUS+) : https://www.xilinx.com/products/boards-and-kits/zcu106.html
 - Rockpro64 (RK3399) : https://www.pine64.org/rockpro64/
