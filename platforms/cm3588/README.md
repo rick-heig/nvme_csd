@@ -121,11 +121,11 @@ For adapters and cables checkout https://blog.reds.ch/?p=1759
 
 As this kit has only PCIe x1 on the M.2 slots, we recommend using M.2 PCIe risers as they are extremely cheap (less than 1$). They can be bought at the usual sources, e.g., aliexpress.
 
-![M.2 Riser](../../res/pictures/m2-riser-pcie-x1.jpg)
+![M.2 Riser](../../res/images/m2-riser-pcie-x1.jpg)
 
 For the host PC it is possible to use an M.2 PCIe switch, this allows to connect up to 4 CSD to a single M.2 slot.
 
-![M.2 Switch](../../res/pictures/m2-switch-pcie-4x1.jpg)
+![M.2 Switch](../../res/images/m2-switch-pcie-4x1.jpg)
 
 # Setting up Ubuntu (or Debian) on the RockPro64
 
