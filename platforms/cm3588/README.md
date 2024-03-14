@@ -123,6 +123,8 @@ As this kit has only PCIe x1 on the M.2 slots, we recommend using M.2 PCIe riser
 
 ![M.2 Riser](../../res/pictures/m2-riser-pcie-x1.jpg)
 
+For the host PC it is possible to use an M.2 PCIe switch, this allows to connect up to 4 CSD to a single M.2 slot.
+
 ![M.2 Switch](../../res/pictures/m2-switch-pcie-4x1.jpg)
 
 # Setting up Ubuntu (or Debian) on the RockPro64
