@@ -79,7 +79,7 @@ We will show below how to setup a virtual interface in the CSD and route traffic
 
 For simplicity and security this is based on an OpenSSH tunnel. This avoid the need to reinvent the well and makes sure that the link is secure and encrypted.
 
-### Prerequisites
+### Prerequisites
 
 The instructions below use an Ubuntu RootFS on the CSD and some tools to configure the network more easily, this can also be done on the buildroot RootFS and without these tools by manually configuring everything.
 
