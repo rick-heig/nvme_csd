@@ -65,7 +65,7 @@ The idea is that images are stored on the CSD as it would be on a normal drive a
 
 On the NVMe CSD we need to install rclip-server. There are several ways to install it but the simplest is with the Ubuntu RootFS for the CSD and `pip` (Package Installer for Python).
 
-Note this is for Python 3.10 or newer, we recommend using a python virtual environment if the Python 3.10 or newer is not the main python installed for the system.
+Note this is for **Python 3.10 or newer**, we recommend using a python virtual environment if the Python 3.10 or newer is not the main python installed for the system.
 
 Instructions are given here for a Ubuntu 23.10 Mantic RootFS as a reference, they might need some adaptation for other RootFSes, however the instructions below allow to get all the requirements.
 
@@ -111,7 +111,7 @@ From the `rclip-server` directory launch the following command
 # Activate phyton venv
 source bin/activate
 # Run rclip-server
-env CLIP_DB=/path/to/images/.rclip/db.sqlite3 uvicorn rclip_server:app --reload
+env CLIP_DB=/path/to/images/.rclip/db.sqlite3 uvicorn rclip_server:app
 # Wait until the message "Application startup complete" appears
 ```
 
