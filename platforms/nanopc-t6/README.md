@@ -116,14 +116,14 @@ sudo fdisk /dev/<the SD card device> # e.g., /dev/sdg
 # Create a new partition (number 2) with 'n', set the first sector to be exactly the same as it was above and use the default parameters for the size, keep the signature !
 # write the changes with 'w'
 # Check the filesystem with e2fsck (fix if errors are found)
-sudo e2fsck -f /dev/<the SD card device RootFS partition> # e.g., /dev/sdg4
+sudo e2fsck -f /dev/<the SD card device RootFS partition> # e.g., /dev/sdg2
 # Resize the RootFS
-sudo resize2fs /dev/<the SD card device RootFS partition> # e.g., /dev/sdg4
+sudo resize2fs /dev/<the SD card device RootFS partition> # e.g., /dev/sdg2
 # Make sure changes are written to SD card with sync
 sudo sync
 # Eject and remount
 # check size with
-df -h
+lsblk
 ```
 
 ### Username and password
