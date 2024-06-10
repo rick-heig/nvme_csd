@@ -46,7 +46,9 @@ The [NVMe CSD firmware](https://github.com/rick-heig/linux-xlnx/blob/csd_2023121
 
 - `firmware` : Documentation about the firmware and code to run on the CSD
 - `host` : User space code and documentation for the host computer
+- `pcb` : Open-Hardware printed circuit boards
 - `platforms` : Documentation for each platform and platform specific files (e.g., FPGA project)
+- `res` : Other resources, mainly images, diagrams, pictures
 
 ## Running the CSD on a platform
 
