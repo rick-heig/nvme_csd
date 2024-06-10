@@ -1,0 +1,24 @@
+Altium Designer Pick and Place Locations
+D:\PCB\REDS\Rick_Wertenbroek\M2male_M2female_miniDP\Project Outputs for M2male_M2female_miniDP\PICK_AND_PLACE\Pick Place for M2male_M2female_miniDP.csv
+
+========================================================================================================================
+File Design Information:
+
+Date:       30.05.24
+Time:       08:36
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mm
+
+"Designator","Comment","Layer","Footprint","Center-X(mm)","Center-Y(mm)","Rotation","Description"
+"JP11","HEADER_3","TopLayer","BLKCON.100/VH/TM1SQ/W.100/3","1.3966","21.2400","270","Barrette simple 3 poles 2.54mm"
+"JP8","JUMPER_A_SOUDER","BottomLayer","JUMPER_A_SOUDER_(0201)","3.2500","18.4000","90","Pont à souder sur print"
+"JP4","JUMPER_A_SOUDER","BottomLayer","JUMPER_A_SOUDER_(0201)","3.2500","20.9500","90","Pont à souder sur print"
+"JP3","JUMPER_A_SOUDER","TopLayer","JUMPER_A_SOUDER_(0201)","7.3500","20.0000","0","Pont à souder sur print"
+"JP2","JUMPER_A_SOUDER","BottomLayer","JUMPER_A_SOUDER_(0201)","3.2500","23.4750","90","Pont à souder sur print"
+"JP1","JUMPER_A_SOUDER","BottomLayer","JUMPER_A_SOUDER_(0201)","17.3750","20.6500","270","Pont à souder sur print"
+"JP6","HEADER_2","TopLayer","BLKCON.100/VH/TM1SQ/W.100/2","9.8750","19.9800","270","Barrette simple 2 poles 2.54mm"
+"JP5","HEADER_2","TopLayer","BLKCON.100/VH/TM1SQ/W.100/2","12.1250","19.9800","90","Barrette simple 2 poles 2.54mm"
+"J3","APCI0164-P001A","TopLayer","APCI0164P001A","10.9998","12.6250","180","Connector"
+"J2","NGFF_M_V2","TopLayer","M.2-M-KEY-2280-V2","11.0000","1.4000","0",""
+"J1","2129320-3","TopLayer","CONN_2129320-3","11.0000","28.0000","180","Conn Display Port RCP 20 POS 0.9mm/1.8mm Solder RA Thru-Hole 20 Terminal 1 Port T/R"
