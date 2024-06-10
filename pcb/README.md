@@ -34,6 +34,10 @@ Please ignore the botch wire, we forgot to route a signal on the old revision of
 
 ![CM3588-Adapters](../res/pictures/20240610_CM3588_NAS_x2x2_res.jpg)
 
+The CM3588 + NAS Kit recognized as a PCIe 3.0 x2 NVMe SSD/CSD by the host.
+
+![CM3588-Adapters2](../res/pictures/pcie_x2_res.jpg)
+
 ## x4 M.2 to x2 M.2 and MiniDP
 
 ![x4M2MDP](../res/images/M2_M2_MDP.png)
