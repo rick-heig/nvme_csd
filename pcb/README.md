@@ -2,6 +2,12 @@
 
 Open-hardware PCBs (Altium)
 
+**Warning:** These PCBs require the PCIe controller and PHYs to be reconfigured to work, they require the device tree to reflect this. For the RK3588 the PHY drivers requires a patch for correct bifurcation of PCIe lines for the x4 to x2 RC + x2 EP.
+
+**Do not use unless you know exactly what you are doing**
+
+![warning](../res/images/operate.png)
+
 ## M.2 to dual USB3 connector
 
 ![M2_USB3](../res/images/M2_USB3.png)
@@ -18,6 +24,10 @@ This allow to make a PCIe 3.0 x2 endpoint on the CM3588 + NAS Kit
 
 This PCB allows to use PCIe 3.0 x2 for a single NVMe SSD on the CM3588 NAS Kit
 
+### PCBs in use on the CM3588 + NAS Kit
+
+![CM3588-Adapters](../res/pictures/20240610_CM3588_NAS_x2x2_res.jpg)
+
 ## x4 M.2 to x2 M.2 and MiniDP
 
 ![x4M2MDP](../res/images/M2_M2_MDP.png)
@@ -31,3 +41,7 @@ Note: USB3 has only 2 high speed differential signals, HDMI has only 3. So they 
 ![MDPM2](../res/images/M2_MDP.png)
 
 This PCB is the other end of the PCB above and allows to get PCIe x2 on a male M.2 connector.
+
+### Adapter PCBs mounted on the FriendlyElec NanoPC-T6
+
+![T6-Adapters](../res/pictures/T6_res.jpg)
