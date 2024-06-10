@@ -3,3 +3,5 @@ archives_*.md
 
 *.o
 *.d
+
+*.DS_Store
