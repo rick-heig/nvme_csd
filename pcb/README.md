@@ -26,6 +26,10 @@ This PCB allows to use PCIe 3.0 x2 for a single NVMe SSD on the CM3588 NAS Kit
 
 ### PCBs in use on the CM3588 + NAS Kit
 
+With this the CM3588 NAS Kit can do PCIe 3.0 x2 instead of x1! 
+
+Please ignore the botch wire, we forgot to route a signal on the old revision of the PCB.
+
 ![CM3588-Adapters](../res/pictures/20240610_CM3588_NAS_x2x2_res.jpg)
 
 ## x4 M.2 to x2 M.2 and MiniDP
