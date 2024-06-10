@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: M2male_miniDP.PcbDoc   30.05.2024  11:32:45
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : M2male_miniDP-RoundHoles.TXT
+ASCII SlotHoles File : M2male_miniDP-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.2mm (8mil)                                              Round             71        PTH        210.88mm (8.30inch)
+T2      0.55mm (22mil)                                            Round             20        PTH        24.23mm (0.95inch)
+T3      0.7mm (28mil)                                             Slot              2         PTH        22.93mm (0.90inch)
+T4      0.9mm (35mil)                                             Round             2         PTH        2.54mm (0.10inch)
+T5      0.9mm (35mil)                                             Slot              2         PTH        25.00mm (0.98inch)
+T6      1mm (39mil)                                               Round             2         NPTH       9.50mm (0.37inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              99
+
+Total Processing Time (hh:mm:ss) : 00:00:00
