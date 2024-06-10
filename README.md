@@ -28,6 +28,8 @@ Computational functions can be activated through NVMe custom commands as well as
 
 Our goal is to support a wide variety of readily available hardware in order to lower the barrier of entry to CSD development as much as possible. We have made it possible to run our CSD firmware on platforms ranging from expensive FPGA SoCs to cheap (sub 100$) off-the-shelf single board computers.
 
+![Our vision](res/diagrams/vision.png)
+
 See the list of supported hardware in the platforms [README](platforms/README.md).
 
 # NVME CSD Firmware
