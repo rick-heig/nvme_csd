@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [M2_to_USB3.PcbDoc]
+   Generated File[M2_to_USB3.TXT]
+   Generated File[M2_to_USB3.LDP]
+   Generated File[M2_to_USB3.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 13:51:42 On 06.05.2024
