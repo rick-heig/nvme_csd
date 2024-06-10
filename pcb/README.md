@@ -2,6 +2,8 @@
 
 Open-hardware PCBs (Altium)
 
+A million thanks to [Cédric Monneron](https://people.hes-so.ch/en/profile/8414894304-cedric-monneron) who did most of the work for the PCB design.
+
 **Warning:** These PCBs require the PCIe controller and PHYs to be reconfigured to work, they require the device tree to reflect this. For the RK3588 the PHY drivers requires a patch for correct bifurcation of PCIe lines for the x4 to x2 RC + x2 EP.
 
 **Do not use unless you know exactly what you are doing**
