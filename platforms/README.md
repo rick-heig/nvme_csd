@@ -17,6 +17,12 @@ The following platforms are currently supported and have been tested in this pro
 
 ## Other platforms
 
+### Wanted !
+
+We are looking for the following boards : Acorn SRQL, RHS Nitefury/Litefury, Aller A7, Bittware 250-M2D, or any M.2 based FPGA board.
+
+If you send us one we will try porting the NVMe CSD project to it !
+
 ### Supported but not tested
 
 The following platforms should be supported (non exhaustive list) but were not tested by us :
