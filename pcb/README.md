@@ -34,6 +34,12 @@ Please ignore the botch wire, we forgot to route a signal on the old revision of
 
 ![CM3588-Adapters](../res/pictures/20240610_CM3588_NAS_x2x2_res.jpg)
 
+The NVMe SSD is recognized and works as a PCIe 3.0 x2 NVMe device.
+
+![CM3588-nvmelist](../res/images/CM3588_x1x1_to_x2_list.png)
+
+![CM3588-lspci](../res/images/CM3588_x1x1_to_x2_lspci.png)
+
 The CM3588 + NAS Kit recognized as a PCIe 3.0 x2 NVMe SSD/CSD by the host.
 
 ![CM3588-Adapters2](../res/pictures/pcie_x2_res.jpg)
