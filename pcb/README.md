@@ -52,6 +52,10 @@ This PCB allows to split a female M.2 PCIe 3.0 x4 into a female M.2 x2 and x2 ov
 
 Note: USB3 has only 2 high speed differential signals, HDMI has only 3. So they can only carry PCIe x1. USB-C could carry PCIe x2 but is not suitable because routing of PERST (PCIe reset) and WAKE signals, which would have to use the auxiliary lines in the USB-C connector, but these lines can be reversed because USB-C can be plugged both ways...
 
+Note: Long miniDP cables don't work. We had success with 0.5m cables but issues with 1m cables.
+
+Note: The PERST / PEWAKE signales should have the solderbriges (JP2, JP8) connected so they are routed to the female M.2 connector.
+
 ## MiniDP to x2 M.2
 
 ![MDPM2](../res/images/M2_MDP.png)
