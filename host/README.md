@@ -31,7 +31,7 @@ A Linux based OS (for other OSes see below)
 
 **Yes**
 
-The CSD is supported on Linux based operating systems with the default NVMe driver. (Of couse on very old kernels without NVMe support it will not work).
+The CSD is supported on Linux based operating systems with the default NVMe driver. (Of course on very old kernels without NVMe support it will not work).
 
 ### Windows Support
 
