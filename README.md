@@ -2,6 +2,8 @@
 
 This project aims to allow anyone to create their own Non Volatile Memory Express (NVMe) Computational Storage Devices with readily available hardware platforms and open-source software.
 
+View our [paper](https://dl.acm.org/doi/10.1145/3697352) (open-access) for background, technical details, benchmarks, and applications.
+
 ## What is computational storage ?
 
 Computational Storage is a new processing paradigm, a new architecture, where storage devices that are capable performing computations are employed.
@@ -34,7 +36,7 @@ See the list of supported hardware in the platforms [README](platforms/README.md
 
 # NVME CSD Firmware
 
-**A Linux based Firmware for Hardware Agnostic NVMe Computational Storage Devices**
+**A Portable Linux-based Firmware for NVMe Computational Storage Devices** - [Paper](https://dl.acm.org/doi/10.1145/3697352)
 
 This project provides an open-source firmware to build hardware agnostic NVMe computational storage devices.
 
@@ -43,6 +45,18 @@ The firmware is implemented as a Linux PCI endpoint function driver. https://doc
 This allows the firmware to run on any target hardware that supports Linux and provides a PCI endpoint controller driver.
 
 The [NVMe CSD firmware](https://github.com/rick-heig/linux-xlnx/blob/csd_20231212/drivers/pci/endpoint/functions/pci-epf-nvme.c) is based on a [Linux NVMe PCI endpoint function](https://github.com/damien-lemoal/linux/commit/45fa62daf92455950044b863a911822e387f6eea) under development which is based on an initial RFC by Alan Mikhak https://lwn.net/Articles/804369/
+
+## Citation
+
+```
+@article{wertenbroek2024portable,
+  title={A Portable Linux-based Firmware for NVMe Computational Storage Devices},
+  author={Wertenbroek, Rick and Thoma, Yann and Dassatti, Alberto},
+  journal={ACM Transactions on Storage},
+  year={2024},
+  publisher={ACM New York, NY}
+}
+```
 
 ## Directory structure
 
