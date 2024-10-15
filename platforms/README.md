@@ -38,7 +38,7 @@ Note that these platforms are supported but can require some amount of work, e.g
 
 ### Hardware supported but missing driver
 
-Any Soc/FPGA capable of running Linux with a PCIe endpoint capable controller IP are suitable canadidate platforms but often a PCI endpoint controller driver is not available.
+Any SoC/FPGA capable of running Linux with a PCIe endpoint capable controller IP are suitable candidate platforms but often a PCI endpoint controller driver is not available.
 
 Non exhaustive list of candidate platforms :
 
