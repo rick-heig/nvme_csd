@@ -148,9 +148,9 @@ The default credentials are : username : `buildroot` password `buildroot`
 
 For adapters and cables checkout https://blog.reds.ch/?p=1759
 
-# Setting up Ubuntu (or Debian) on the RockPro64
+# Setting up Ubuntu (or Debian) on the T6
 
-The minimal RootFS built with buildroot above may not be the most friendly environment for rapid testing and prototyping, especially for user space programs, therefore we show how to install Ubuntu on the RockPro64.
+The minimal RootFS built with buildroot above may not be the most friendly environment for rapid testing and prototyping, especially for user space programs, therefore we show how to install Ubuntu on the T6.
 
 ## Prebuilt image
 
@@ -170,7 +170,7 @@ sudo apt install binfmt-support qemu-user-static debootstrap
 
 ## Setup
 
-From the `platforms/cm3588/work`directory :
+From the `platforms/nanopc-t6/work`directory :
 
 ```shell
 # in the work directory create a RootFS directory (can be on SD directly)
@@ -276,7 +276,7 @@ apt install ubuntu-server
 apt install openssh-server net-tools
 ```
 
-Packages can also be installed through host with chroot but depending on what you install `apt` will want to redirect things to `/dev/null` and the virtual filesystem `/dev` is not mounted. It is not recommended to mount the host virtual filesystems (e.g., `/dev`, `/proc`, `/sys`) because we are not installing things for the host but for the RockPro64 and information from the host virtual filesystems will not correspond to the RockPro64. Also this exposes host filesystems to the chroot environment. For `/dev/null` we can read in the `man null` command :
+Packages can also be installed through host with chroot but depending on what you install `apt` will want to redirect things to `/dev/null` and the virtual filesystem `/dev` is not mounted. It is not recommended to mount the host virtual filesystems (e.g., `/dev`, `/proc`, `/sys`) because we are not installing things for the host but for the embedded board and information from the host virtual filesystems will not correspond to the embedded board. Also this exposes host filesystems to the chroot environment. For `/dev/null` we can read in the `man null` command :
 
 ```
        Data  written  to the /dev/null and /dev/zero special
