@@ -11,12 +11,14 @@ The following platforms are currently supported and have been tested in this pro
 - **Xilinx/AMD** ZCU106 (ZynqUS+) : [zcu106](zcu106) - https://www.xilinx.com/products/boards-and-kits/zcu106.html
 - Rockpro64 (RK3399) : [rockpro64](rockpro64) - https://www.pine64.org/rockpro64/
 - NanoPC-T4 (RK3399) : [nanopc-t4](nanopc-t4) - https://www.friendlyelec.com/index.php?route=product/product&product_id=225
-- CM3588+NAS Kit : [cm3588](cm3588) - https://www.friendlyelec.com/index.php?route=product/product&product_id=294
+- CM3588+NAS Kit (RK3588) : [cm3588](cm3588) - https://www.friendlyelec.com/index.php?route=product/product&product_id=294
 - NanoPC-T6 (RK3588) : [nanopc-t6](nanopc-t6) - https://www.friendlyelec.com/index.php?route=product/product&product_id=292
 - Rock5B (RK3588) : https://radxa.com/products/rock5/5b/
 - **New** BeagleY-AI (AM67A) : [beagley-ai](beagley-ai) - https://www.beagleboard.org/boards/beagley-ai
 
 We recommend a **RK3588** based platform as they provide a good performance/price ratio.
+
+Note: We don't provide instructions for the Rock5B and older NanoPC-T4 so if you want to target these boards you'll have to adapt the project yourself, for the Rock5B take the NanoPC-T6 as a reference and for the NanoPC-T4 take the Rockpro64 as a reference, the main difference would be adapting the device trees in use.
 
 ## Other platforms
 
