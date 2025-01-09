@@ -127,9 +127,9 @@ For the host PC it is possible to use an M.2 PCIe switch, this allows to connect
 
 ![M.2 Switch](../../res/images/m2-switch-pcie-4x1.jpg)
 
-# Setting up Ubuntu (or Debian) on the RockPro64
+# Setting up Ubuntu (or Debian) on the CM3588
 
-The minimal RootFS built with buildroot above may not be the most friendly environment for rapid testing and prototyping, especially for user space programs, therefore we show how to install Ubuntu on the RockPro64.
+The minimal RootFS built with buildroot above may not be the most friendly environment for rapid testing and prototyping, especially for user space programs, therefore we show how to install Ubuntu on the CM3588.
 
 ## Prebuilt image
 
