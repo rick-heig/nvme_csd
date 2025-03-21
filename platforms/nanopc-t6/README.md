@@ -28,6 +28,8 @@ M.2 to PCIe x16 female : https://www.delock.com/produkt/64133/merkmale.html
 
 PCIe x4 male-to-male : http://www.adtlink.cn/en/product/R22SS.html or https://www.adexelec.com/pe-flex1-4-8-16 **Important:** You will need the signal swap version of the cable "Tx to Rx signal swap".
 
+# Running instructions
+
 For running the CSD follow the instructions on the main [README](../../README.md). **Only use 1 or 2 threads** because only 2 PCIe DMA engines are available and extra threads will use the general DMA gives errors when used at the same time as the PCIe DMAs.
 
 # Adapter PCBs and enclosure

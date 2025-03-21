@@ -15,6 +15,10 @@ The FriendlyElec CM3588 + NAS Kit combines a RK3588 based compute module with a 
 - eMMC Flash: 0GB/64GB eMMC, at HS400 mode
 - ...
 
+# Running instructions
+
+For running the CSD follow the instructions on the main [README](../../README.md). **Only use 1 or 2 threads** because only 2 PCIe DMA engines are available and extra threads will use the general DMA gives errors when used at the same time as the PCIe DMAs.
+
 # Setting up a development environment
 
 These are the instructions to setup Linux and the CSD firmware for the FriendlyElec CM3588+NAS kit. The Linux kernel and RootFS are built with buildroot.

@@ -82,6 +82,8 @@ For example with a SATA SSD/HDD or USB flash drive attached as `/dev/sda`, or `/
 sudo nvme-epf-script -q 4 -l /dev/sda --threads 4 start
 ```
 
+**For RK3588-based platforms launch with 2 threads only** as they have only 2 dedicated PCIe DMAs and more threads will cause conflicts between the dedicated DMAs and general DMAs.
+
 - It is possible to check for error messages or correct execution in the kernel log with `dmesg`.
 - For automated start, write the command in a startup script e.g., with `init.d`. This way the CSD can start without manual intervention.
 
